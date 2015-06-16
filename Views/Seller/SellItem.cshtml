@@ -1,0 +1,128 @@
+﻿@model Project_Ead_EDEAL.Models.Item
+
+@{
+    ViewBag.Title = "SellItem";
+}
+
+@{
+    Layout = "~/Views/Shared/LayoutOther.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $("#mf").submit(function (submitEvent) {
+
+            // get the file name, possibly with path (depends on browser)
+            var filename = $("#uf").val();
+
+            // Use a regular expression to trim everything before final dot
+            var extension = filename.replace(/^.*\./, '');
+
+            // Iff there is no dot anywhere in filename, we would have extension == filename,
+            // so we account for this possibility now
+            if (extension == filename) {
+                extension = '';
+            } else {
+                // if there is an extension, we convert to lower case
+                // (N.B. this conversion will not effect the value of the extension
+                // on the file upload.)
+                extension = extension.toLowerCase();
+            }
+
+            switch (extension) {
+                case 'jpg':
+                case 'jpeg':
+                case 'png':
+                case '':    
+                    // uncomment the next line to allow the form to submitted in this case:
+                   break;
+
+                default:
+                    // Cancel the form submission
+                    $("#l1").text("Please Upload an jpg or png file");
+                    submitEvent.preventDefault();
+            }
+
+        });
+    });
+
+</script>
+
+<div class="col-xs-9">
+    <br />
+    <br />
+    <div>
+        <h2>LARGEST SELLING AND BUYING SITE...</h2>
+    </div>
+    <div>
+        <h2>POST YOUR ADD :)</h2>
+    </div>
+
+
+    <div class="navbar navbar-default">
+        <br />
+        <form  id="mf" class="form col-md-9 center-block" method="post" action="/Seller/PostAd" enctype="multipart/form-data" style="margin-left:100px;">
+            <label style="color:darkred" id="l1"></label>
+            
+             @if(Session["un"] == null)
+            {
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.Name, new {@class="form-control input-lg",@required="required",placeholder="Email will help to track your ad by logging in ",Type="Email"})
+            </div>
+            }else{
+                 <div class="form-group">
+                @Html.TextBoxFor(x => x.Name, new {@class="form-control input-lg",@required="required",placeholder="Email",@Value=Session["un"],@readonly="readonly" ,Type="Email"})
+            </div>
+            }
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.Title, new {@class="form-control input-lg",@required="required",placeholder="Title"})
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.CellNo, new {@class="form-control input-lg",@required="required",placeholder="Cell#"})
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.Price, new {@class="form-control input-lg",@required="required",Type="Number",placeholder="Price"})
+            </div>
+             <div class="form-group">
+                @Html.TextAreaFor(x => x.Description, new {@class="form-control input-lg",@required="required",placeholder="Description"})
+            </div>
+             <div >
+                 
+               <input name="uf" id="uf" class="btn btn-success btn-lg btn-block" type="file" />
+               <br />
+            </div>
+
+            <div class="form-group">
+                @Html.DropDownListFor(x=>x.Category, new List<SelectListItem>
+                                    {
+                                         new SelectListItem{ Text="Mobiles", Value = "Mobiles" }, 
+                                             new SelectListItem{ Text="Electronics", Value = "Electronics" },
+                                            new SelectListItem{ Text="Cars", Value = "Cars" },
+                                             new SelectListItem{ Text="Computers", Value = "Computers" },
+                                              new SelectListItem{ Text="Laptops", Value = "Laptops" }
+                                     } ,new {@class="form-control input-lg"})
+                
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(x=>x.City, new List<SelectListItem>
+                                    {
+                                         new SelectListItem{ Text="Lahore", Value = "Lahore" }, 
+                                             new SelectListItem{ Text="Karachi", Value = "Karachi" },
+                                            new SelectListItem{ Text="Islamabad", Value = "Islamabad" },
+                                             new SelectListItem{ Text="Faislabad", Value = "Faisalabad" },
+                                              new SelectListItem{ Text="Peshawer", Value = "Peshawer" }
+                                     } ,new {@class="form-control input-lg"})
+
+               
+                
+            </div>
+            <div class="form-group">
+                <br />
+                <br />
+                <button class="btn btn-primary btn-lg btn-block">POST</button>
+
+            </div>
+        </form>
+
+    </div>
+</div>

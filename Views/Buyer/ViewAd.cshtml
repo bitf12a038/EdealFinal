@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "ViewAd";
+}
+
+@model Project_Ead_EDEAL.Models.ItemAndComments
+
+@{
+    Layout = "~/Views/Shared/LayoutOther.cshtml";
+}
+
+
+<div class="col-xs-9">
+    <br />
+    <br />
+    <div>
+    </div>
+    <div>
+        <h2 style="color:blue">Details</h2>
+    </div>
+
+
+   
+        
+    <div class="navbar navbar-default">
+        <div class="row">
+        <div class="col-xs-5">
+            <a href="@Model.Image" title="myImg">
+             <img src="@Model.Image"  class="img-thumbnail" width="400" />
+                </a>
+        </div>
+       </div>
+        <div class="col-xs-4">
+            <h2 style="color:cadetblue;">@Model.Title</h2>
+            <h3>Price : @Model.Price</h3>
+            <h3>Cell No : @Model.CellNo</h3>
+            <h3>City:@Model.City</h3>
+            <h3>Details : @Model.Description</h3>
+        </div>
+
+        @if(Model.Name == (string)Session["un"]){
+        <div class="col-xs-2">
+            <br />
+           
+            <h3>@Html.ActionLink("EDIT","EditAd/"+@Model.Id,"Seller")</h3>
+            <h3>@Html.ActionLink("DELETE","DeleteAd/"+@Model.Id,"Seller")</h3>
+        </div>
+        }
+        
+    </div>
+
+   
+    
+    @foreach(var x in Model.CL){
+        
+        <div class="navbar navbar-default"> 
+            <div class="col-xs-9">  
+            <h4 style="color:brown;">@x.UserName :  @x.CommentText</h4> 
+            </div>              
+         </div>
+
+    }
+   
+
+
+    @if(Session["un"] != null){
+    <form class="form col-md-12 center-block" method="post" action="/Buyer/ViewAd/@Model.Id" >
+
+            <div class="form-group">
+             <textarea class="form-control input-lg" required="required" name="comment" id="comment" placeholder="Comment"></textarea>
+            </div>
+
+        <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block">POST</button>
+
+        </div>
+        </form>
+    }else{
+        
+        <div class="form-group">
+                <a class="btn btn-primary btn-lg btn-block" href="/SuperUser/Login">Login to comment </a>
+
+        </div>
+    }
+   
+</div>

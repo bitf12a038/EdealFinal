@@ -1,0 +1,41 @@
+﻿
+
+@{
+    ViewBag.Title = "BuyMobiles";
+}
+
+@model List<Project_Ead_EDEAL.Models.Item>
+
+@{
+    Layout = "~/Views/Shared/LayoutOther.cshtml";
+}
+
+
+<div class="col-xs-9">
+    <br />
+    <br />
+    <div>
+        <h2>LARGEST SELLING AND BUYING SITE...</h2>
+    </div>
+    <div>
+        <h2 style="color:blue">All Mobiles Here ...</h2>
+    </div>
+
+
+    @foreach(var x in Model){
+    <div class="navbar navbar-default">
+        <div class="col-xs-5">
+            <img src="@x.Image" class="img-thumbnail" width="300" />
+        </div>
+        <div class="col-xs-4">
+            <h2>@Html.ActionLink(x.Title,"ViewAd/"+x.Id,"Buyer")</h2>
+            <h3>Price : @x.Price</h3>
+            <h3>Cell No : @x.CellNo</h3>
+            <h3>City:@x.City</h3>
+        </div>
+        
+    </div>
+
+    }
+   
+</div>

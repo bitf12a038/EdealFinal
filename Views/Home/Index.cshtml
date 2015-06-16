@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@{
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+
+<script>
+    $('.navbar li').click(function (e) {
+
+           
+            var $this = $(this);
+            if (!$this.hasClass('active')) {
+
+                $('.navbar li.active').removeClass('active');
+                $this.addClass('active');
+            }
+           // e.preventDefault();
+        });
+
+</script>
+<div class="col-xs-3">
+    <a href="~/Images/ip-banner.jpg" title="myImg">
+    <img src="~/Images/ip-banner.jpg" class="img-thumbnail" width="250" />
+    </a>
+</div>
+<div class="col-xs-3">
+    <a href="~/Images/car-banner.jpg" title="myImg">
+    <img src="~/Images/car-banner.jpg" class="img-thumbnail" width="250" />
+    </a>
+</div>
+<div class="col-xs-3">
+    <a href="~/Images/bike-banner.jpg" title="myImg">
+    <img src="~/Images/bike-banner.jpg" class="img-thumbnail" width="250" />
+    </a>
+</div>
+
+<div class="col-xs-9">
+    <br />
+    <br />
+    <div class="navbar navbar-default">
+        <h2>LARGEST SELLING AND BUYING SITE... </h2>
+    </div>
+
+    <div>
+
+        <br />
+        <h2>OVERVIEW</h2>
+        <h3>This website provide a huge platform for buyers and sellers to deal without any third person.People can buy and sell things safely and easily by sitting home</h3>
+
+    </div>
+</div>

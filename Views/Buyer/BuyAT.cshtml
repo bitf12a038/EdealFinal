@@ -1,0 +1,83 @@
+﻿@model Project_Ead_EDEAL.Models.Item
+@{
+    ViewBag.Title = "Buy";
+}
+
+@{
+    Layout = "~/Views/Shared/LayoutOther.cshtml";
+}
+
+ 
+<script>
+
+    $(document).ready(f1);
+
+    function f1() {
+
+        $("#bSearch").on("click", function () {
+
+            var cate = $("#cSelector").val();
+            var item = $("#St").val();
+            
+           // alert("sdfasfd");
+
+            $.getJSON("/Buyer/SearchAt?cat="+cate+"&items="+item, function (list) {
+
+                $("#d1 div").remove();
+
+                for (var i = 0, l = list.length; i < l; i++) {
+                   
+                    $("#d2").append("<div class=\"navbar navbar-default\" id=\""+i+"\"></div>");
+                    $("#"+i).append("<div class=\" col-xs-5 \" id=\"imgdiv\"><img src=" + list[i].Image + " class=\"img-thumbnail\" width=\"300\" heigth=\"300\" </img></div>");
+                    $("#"+i).append("<div class=\" col-xs-4 \" id=\"detdiv\"><h2><a href=\"ViewAd/" + list[i].Id + "\">" + list[i].Title + "</a></h2><h3> Price : " + list[i].Price + "</h3><h3> Cell : " + list[i].CellNo + "</h3><h3> City : " + list[i].City + "</h3></div>")
+                    
+
+                }
+                
+            });
+
+        });
+    }
+
+
+</script>
+
+<div class="col-xs-9" id="d2">
+    <br />
+    <br />
+    <div>
+        <h2>LARGEST SELLING AND BUYING SITE...</h2>
+    </div>
+    <div>
+        <h2>Search Ad Here ...</h2>
+    </div>
+
+
+    <div class="navbar navbar-default">
+        <br />
+        <div class="form col-md-12 center-block">
+            
+            <div class="row form-group">
+                @Html.DropDownListFor(x=>x.Category, new List<SelectListItem>
+                                    {
+                                         new SelectListItem{ Text="Mobiles", Value = "Mobiles" }, 
+                                             new SelectListItem{ Text="Electronics", Value = "Electronics" },
+                                            new SelectListItem{ Text="Cars", Value = "Cars" },
+                                             new SelectListItem{ Text="Computers", Value = "Computers" },
+                                              new SelectListItem{ Text="Laptops", Value = "Laptops" }
+                                     } ,new {@class="form-control input-lg" , id="cSelector"})
+                
+            </div>
+            <div class="form-group">
+                <input type="text" name="St" id="St" required="required" class="form-control input-lg" placeholder="Search" />
+            </div>
+            <div class="form-group">
+
+                <button class="btn btn-primary btn-lg btn-block" name="bSearch" id="bSearch">GET</button>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

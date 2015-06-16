@@ -1,0 +1,17 @@
+﻿@model Project_Ead_EDEAL.Models.UserStatistics
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";
+}
+
+
+<div class="col-xs-5" style="margin-left:200px;">
+   <a class="btn btn btn-success btn-lg btn-block" href="UserRecords/GetAllUsers">TOTAL USERS : @Model.Total</a>
+    <a class="btn btn-primary btn-lg btn-block" href="UserRecords/GetOnline">ONLINE USERS : @Model.Online</a>
+   <a class="btn btn-primary btn-lg btn-block" style="background-color:gray;" href="UserRecords/GetOffline">OFFLINE USERS : @Model.Offline</a>
+    <a class="btn btn-warning btn-lg btn-block" style="background-color:darkred;" href="UserRecords/GetBlocked">BLOCKED USERS : @Model.Blocked</a>
+
+</div>

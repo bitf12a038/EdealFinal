@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "GetOnline";
+}
+
+
+@model List<Project_Ead_EDEAL.Models.SuperUser>
+
+@{
+    
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";
+    
+}
+
+<div class="col-xs-9" id="d2">
+    <br />
+    <br />
+    <div>
+        <h2>LARGEST SELLING AND BUYING SITE...</h2>
+    </div>
+    <div>
+        <h2>Users</h2>
+    </div>
+
+
+   
+         @foreach(var x in Model){
+    <div class="navbar navbar-default">
+        <div class="col-xs-3">
+            <img src="~/FilesUpload/up.png"  class="img-thumbnail" width="250" height="200" />
+        </div>
+        <div class="col-xs-5">
+            
+            <h3>NAME : @x.Name</h3>
+            <h3>EMAIL: @x.Email</h3>
+            <h3>NOW : @x.Status </h3>
+            @if(x.Status == "blocked"){
+            <h3><a href="/UserRecords/UnBlock/@x.Id">Unblock User</a></h3>
+            }
+            else
+            {
+             <h3><a href="/UserRecords/Block/@x.Id">Block User</a></h3>   
+            }
+        </div>
+    </div>
+         }
+    
+</div>
+

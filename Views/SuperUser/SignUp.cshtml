@@ -1,0 +1,110 @@
+﻿@model Project_Ead_EDEAL.Models.SuperUser
+
+@{
+    ViewBag.Title = "SignUp";
+}
+
+@{
+    Layout = "~/Views/Shared/LayoutOther.cshtml";
+}
+
+<script>
+
+    $(document).ready(f1);
+
+    
+
+    function f1() {
+
+        $("#bCheck").on("click", function () {
+
+            var em = $("#et").val();
+
+            if (em.length == 0 || em == null) {
+                $("#l1").text("*Please fil the email");
+            }
+            else {
+
+                $("#l1").text("");
+                $.getJSON("/SuperUser/CheckUser?email=" + em, function (isAlready) {
+
+                    if (isAlready) {
+                        $("#bSub").attr("disabled","disabled");
+                        $("#l1").text("*Oops..Username not available :(");
+
+                    } else {
+
+                        $("#l1").text("*Username available :)");
+                        $("#bSub").removeAttr("disabled");
+                    }
+
+                });
+                
+            }
+
+
+            
+
+        });
+
+        $("#bSub").on("click", function () {
+
+            var p1 = $("#p1").val();
+            var p2 = $("#p2").val();
+
+            if (p1 != p2) {
+
+                $("#l1").text("*Password not match");
+                return false;
+            } else {
+
+                $("#l1").text("");
+            }
+
+           
+        });
+
+        return false;
+    }
+
+
+</script>
+<div class="col-xs-9">
+    <br />
+    <br />
+    <div>
+        <h2>Create Account :)  </h2>
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <div>
+        <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block" style="background-color:darkcyan" id="bCheck">CHECK EMAIL</button>
+
+            </div>
+        <form class="form col-md-12 center-block" onsubmit="return validate()" method="post" action="/SuperUser/AddUser">  
+            <label style="color:darkred" id="l1"></label>
+            <br />
+            <div class="form-group">
+                 @Html.TextBoxFor(u => u.Email, new {@class="form-control input-lg",@required="required",Type="Email",placeholder="Email",id="et"})
+            </div>
+             
+            <div class="form-group">
+                @Html.TextBoxFor(u => u.Name, new {@class="form-control input-lg",@required="required",placeholder="Full Name" })
+            </div>
+            <div class="form-group">
+                 @Html.PasswordFor(u => u.Password, new {@class="form-control input-lg",@required="required",placeholder="Password", id="p1" })
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control input-lg" required="required" placeholder="Confirm Password" id="p2" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block" disabled id="bSub">Sign Up</button>
+
+            </div>
+        </form>
+
+    </div>
+</div>

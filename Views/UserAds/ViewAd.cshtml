@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "ViewAd";
+}
+
+@model Project_Ead_EDEAL.Models.ItemAndComments
+
+@{
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";
+}
+
+
+<div class="col-xs-9">
+    <br />
+    <br />
+    <div>
+    </div>
+    <div>
+        <h2 style="color:blue">Details</h2>
+    </div>
+
+
+   
+        
+    <div class="navbar navbar-default">
+        <div class="row">
+        <div class="col-xs-5">
+            <a href="@Model.Image" title="myImg">
+             <img src="@Model.Image"  class="img-thumbnail" width="400" />
+                </a>
+        </div>
+       </div>
+        <div class="col-xs-4">
+            <h2 style="color:cadetblue;">@Model.Title</h2>
+            <h3>Price : @Model.Price</h3>
+            <h3>Cell No : @Model.CellNo</h3>
+            <h3>City:@Model.City</h3>
+            <h3>Details : @Model.Description</h3>
+             <h3>Email:@Model.Name</h3>
+        </div>
+
+       @if(Session["admin"]!= null){
+           
+        <div class="col-xs-2">
+            <br />
+            <h3>@Html.ActionLink("DELETE","DeleteAd/"+@Model.Id,"Seller")</h3>
+        </div>
+           
+       }
+        
+    </div>
+
+   
+    
+    @foreach(var x in Model.CL){
+        
+        <div class="navbar navbar-default"> 
+            <div class="col-xs-9">  
+            <h4 style="color:brown;">@x.UserName :  @x.CommentText</h4> 
+            </div>              
+         </div>
+
+    }
+   
+   
+</div>
